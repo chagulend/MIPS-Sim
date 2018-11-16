@@ -16,3 +16,18 @@ class Test_CPU_element:
         assert left not in cpu.outputs
         assert right in cpu.outputs
         assert right not in cpu.inputs
+
+    def test_connect(self):
+        left = "left"
+        right = "right"
+        a = CPU_element([left], [right])
+        b = CPU_element([right], [left])
+        with pytest.raises(TypeError):
+            b.connect(a)
+            b.connect(5)
+            b.connect([5])
+        b.connect([a])
+        assert b.input_sources[right] == a
+        with pytest.raises(KeyError):
+            b.input_sources[left]
+        b.connect([CPU_element([], [right])])
