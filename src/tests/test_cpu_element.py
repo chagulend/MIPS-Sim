@@ -30,4 +30,11 @@ class Test_CPU_element:
         assert b.input_sources[right] == a
         with pytest.raises(KeyError):
             b.input_sources[left]
-        b.connect([CPU_element([], [right])])
+            b.connect([CPU_element([], [right])])
+
+    def test_read_input(self):
+        pass
+
+    def test_write_output(self):
+        with pytest.raises(NotImplementedError):
+            CPU_element([], []).write_output()
