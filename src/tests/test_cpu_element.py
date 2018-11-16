@@ -19,7 +19,7 @@ class Test_CPU_element:
         assert result not in cpu.inputs
 
     def test_connect(self):
-        a = CPU_element([], [result])
+        a = CPU_element([source], [result])
         b = CPU_element([result], [])
         with pytest.raises(TypeError):
             b.connect(a)
@@ -32,13 +32,16 @@ class Test_CPU_element:
             b.connect([CPU_element([], [result])])
 
     def test_read_input(self):
-        a = CPU_element([], [result])
+        a = CPU_element([source], [result])
         b = CPU_element([result], [])
         i = 42
         b.connect([a])
         a.outputs[result] = i
+        assert b.inputs[result] == 0
         b.read_inputs()
         assert b.inputs[result] == i
+        with pytest.raises(KeyError):
+            a.read_inputs()
 
     def test_write_output(self):
         with pytest.raises(NotImplementedError):
