@@ -30,7 +30,13 @@ class Test_CPU_element:
         with pytest.raises(KeyError):
             b.input_sources[source]
             b.connect([CPU_element([], [result])])
-
+        names = "abcdefg"
+        elements = [CPU_element([], [c]) for c in names]
+        b.connect(elements)
+        for name, element in zip(names, elements):
+            assert name in b.input_sources
+            assert b.input_sources[name] == element
+        
     def test_read_input(self):
         a = CPU_element([source], [result])
         b = CPU_element([result], [])
