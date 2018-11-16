@@ -3,7 +3,7 @@ from cpu_element import CPU_element
 from mux import Mux
 
 
-signals = ["control", "one", "two"]
+signals = ["control", "zero", "one"]
 result = "result"
 
 def set_signals(source, target, signals, values):
@@ -22,10 +22,7 @@ class Test_Mux:
     def test_write_outputs(self):
         zero = 55
         one = 44
-        control = True
-        values = [control, zero, one]
-        set_signals(self.source, self.mux, signals, values)
+        set_signals(self.source, self.mux, signals, [True, zero, one])
         assert self.mux.outputs[result] == one
-        control = False
-        set_signals(self.source, self.mux, signals, values)
+        set_signals(self.source, self.mux, signals, [False, zero, one])
         assert self.mux.outputs[result] == zero
