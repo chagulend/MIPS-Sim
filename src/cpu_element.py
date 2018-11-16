@@ -31,7 +31,8 @@ class CPU_element:
                                    .format(source, self.input_sources[source]))
 
     def read_inputs(self):
-        """ Reads the inputs of the cpu element."""
+        """ Reads the inputs of the cpu element. Raises a KeyError if
+        the element misses a input."""
         for name in self.inputs:
             element = self.input_sources[name]
             try:
