@@ -35,18 +35,10 @@ class CPU_element:
         for name in self.inputs:
             element = self.input_sources[name]
             try:
-                self.inputs[name] = element.get_output(name)
+                self.inputs[name] = element.outputs[name]
             except KeyError:
                 pass
-
 
     def write_output(self):
         raise NotImplementedError(
             "write_output must be implemented by CPU Element:", self)
-
-    def get_output(self, field):
-        pass
-
-    def get_output_names(self):
-        """ Returns the CPU_element's output names as a list."""
-        return list(self.outputs.keys())
