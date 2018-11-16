@@ -52,6 +52,6 @@ class Test_CPU_element:
             a.outputs[result] = "hei"
             b.read_inputs()
 
-    def test_write_output(self):
+    def test_write_outputs(self):
         with pytest.raises(NotImplementedError):
-            CPU_element([], []).write_output()
+            CPU_element([], []).write_outputs()

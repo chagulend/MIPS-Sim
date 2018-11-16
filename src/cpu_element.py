@@ -45,6 +45,6 @@ class CPU_element:
                 raise TypeError("Input should only use integers."
                                 + " Got {} from {}.".format(value, element))
 
-    def write_output(self):
+    def write_outputs(self):
         raise NotImplementedError(
             "write_output must be implemented by CPU Element:", self)
