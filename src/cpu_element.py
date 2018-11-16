@@ -21,13 +21,13 @@ class CPU_element:
         for element in inputs:
             if not isinstance(element, CPU_element):
                 raise TypeError("Inputs list should only contain instances"
-                                + "of CPU_element.")
+                                + " of CPU_element.")
             for output in element.outputs:
                 source = self.input_sources.setdefault(output, element)
                 if source != element:
                     raise KeyError("Duplicace input name detected;"
-                                   + "got {} from {}".format(output, element)
-                                   + "Has: {} from {}."
+                                   + " got {} from {}".format(output, element)
+                                   + " Has: {} from {}."
                                    .format(source, self.input_sources[source]))
 
     def read_inputs(self):
@@ -35,10 +35,15 @@ class CPU_element:
         the element misses a input source."""
         for name in self.inputs:
             element = self.input_sources[name]
+            value = 0
             try:
-                self.inputs[name] = element.outputs[name]
+                value = element.outputs[name]
+                self.inputs[name] = value
             except KeyError:
                 pass
+            if not isinstance(value, int):
+                raise TypeError("Input should only use integers."
+                                + " Got {} from {}.".format(value, element))
 
     def write_output(self):
         raise NotImplementedError(
