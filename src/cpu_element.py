@@ -47,4 +47,4 @@ class CPU_element:
 
     def write_outputs(self):
         raise NotImplementedError(
-            "write_output must be implemented by CPU Element:", self)
+            "write_outputs must be implemented by CPU Element:", self)
