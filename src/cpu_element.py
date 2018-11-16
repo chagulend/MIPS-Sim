@@ -32,7 +32,7 @@ class CPU_element:
 
     def read_inputs(self):
         """ Reads the inputs of the cpu element. Raises a KeyError if
-        the element misses a input."""
+        the element misses a input source."""
         for name in self.inputs:
             element = self.input_sources[name]
             try:
