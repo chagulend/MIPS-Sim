@@ -48,6 +48,9 @@ class Test_CPU_element:
         assert b.inputs[result] == i
         with pytest.raises(KeyError):
             a.read_inputs()
+        with pytest.raises(TypeError):
+            a.outputs[result] = "hei"
+            b.read_inputs()
 
     def test_write_output(self):
         with pytest.raises(NotImplementedError):
