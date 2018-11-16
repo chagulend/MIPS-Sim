@@ -6,6 +6,11 @@ from mux import Mux
 signals = ["control", "one", "two"]
 result = "result"
 
+def set_signals(source, target, signals, values):
+    for name, value in zip(signals, values):
+        source.outputs[name] = value
+    target.read_inputs()
+
 
 class Test_Mux:
     source = CPU_element([], signals)
@@ -14,4 +19,12 @@ class Test_Mux:
     mux.connect([source])
 
     def test_write_output(self):
-        assert self.mux.outputs[result] == 0
+        zero = 55
+        one = 44
+        control = True
+        values = [control, zero, one]
+        set_signals(self.source, self.mux, signals, values)
+        assert self.mux.outputs[result] == one
+        control = False
+        set_signals(self.source, self.mux, signals, values)
+        assert self.mux.outputs[result] == zero
