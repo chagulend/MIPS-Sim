@@ -10,6 +10,7 @@ def set_signals(source, target, signals, values):
     for name, value in zip(signals, values):
         source.outputs[name] = value
     target.read_inputs()
+    target.write_outputs()
 
 
 class Test_Mux:
@@ -18,7 +19,7 @@ class Test_Mux:
     assert isinstance(mux, CPU_element)
     mux.connect([source])
 
-    def test_write_output(self):
+    def test_write_outputs(self):
         zero = 55
         one = 44
         control = True
