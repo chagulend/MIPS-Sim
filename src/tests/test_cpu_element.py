@@ -36,7 +36,7 @@ class Test_CPU_element:
         for name, element in zip(names, elements):
             assert name in b.input_sources
             assert b.input_sources[name] == element
-        
+
     def test_read_input(self):
         a = CPU_element([source], [result])
         b = CPU_element([result], [])
