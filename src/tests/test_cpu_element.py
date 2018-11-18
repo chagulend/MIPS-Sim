@@ -1,6 +1,7 @@
 import pytest
 from cpu_element import CPU_element
 
+
 source = "source"
 result = "result"
 
@@ -9,8 +10,9 @@ class Test_CPU_element:
     def test_init(self):
         with pytest.raises(TypeError):
             CPU_element()
-            CPU_element(source)
+        with pytest.raises(TypeError):
             CPU_element(source, result)
+        with pytest.raises(TypeError):
             CPU_element([1], [2])
         cpu = CPU_element([source], [result])
         assert source in cpu.inputs
@@ -19,23 +21,25 @@ class Test_CPU_element:
         assert result not in cpu.inputs
 
     def test_connect(self):
-        a = CPU_element([source], [result])
+        a = CPU_element([source], [result, source])
         b = CPU_element([result], [])
         with pytest.raises(TypeError):
             b.connect(a)
-            b.connect(5)
+        with pytest.raises(TypeError):
             b.connect([5])
         b.connect([a])
         assert b.input_sources[result] == a
+        assert source not in b.input_sources
         with pytest.raises(KeyError):
-            b.input_sources[source]
             b.connect([CPU_element([], [result])])
-        names = "abcdefg"
+
+    def test_connect_multiple(self):
+        names = "abcdfg"
         elements = [CPU_element([], [c]) for c in names]
-        b.connect(elements)
-        for name, element in zip(names, elements):
-            assert name in b.input_sources
-            assert b.input_sources[name] == element
+        a = CPU_element(list(names), [])
+        a.connect(elements)
+        sources = {key:item for key, item in zip(names, elements)}
+        assert sources == a.input_sources
 
     def test_read_input(self):
         a = CPU_element([source], [result])
