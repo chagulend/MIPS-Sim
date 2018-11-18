@@ -5,7 +5,6 @@ class Mux(CPU_element):
     def write_outputs(self):
         control = self.inputs[self.input_names[0]]
         result = self.output_names[0]
-        print(control, result)
         if control:
             self.outputs[result] = self.inputs[self.input_names[2]]
         else:
