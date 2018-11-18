@@ -36,21 +36,15 @@ class CPU_element:
             raise ValueError(self, "was not connected fully, missing", missing)
 
     def read_inputs(self):
-        """ Reads the inputs of the cpu element. Raises a KeyError if
-        the element misses a input source."""
-        inputs = set(self.inputs)
-        for name in inputs:
-            element = self.input_sources[name]
-            sources = inputs.intersection(element.outputs)
-            value = 0
-            try:
-                value = element.outputs[name]
-                self.inputs[name] = value
-            except KeyError:
-                pass
+        """ Reads the inputs of the cpu element."""
+        for name, element in self.input_sources.items():
+            value = element.outputs.get(name)
+            if value == None:
+                continue
             if not isinstance(value, int):
-                raise TypeError("Input should only use integers."
-                                + " Got {} from {}.".format(value, element))
+                raise TypeError("Input should only use integers. "
+                                + "Got {} from {}.".format(value, element))
+            self.inputs[name] = value
 
     def write_outputs(self):
         raise NotImplementedError(
