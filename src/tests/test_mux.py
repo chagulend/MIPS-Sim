@@ -1,16 +1,11 @@
 import pytest
 from cpu_element import CPU_element
 from mux import Mux
+from tests.tools import set_signals
 
 
 signals = ["control", "zero", "one"]
 result = "result"
-
-def set_signals(source, target, signals, values):
-    for name, value in zip(signals, values):
-        source.outputs[name] = value
-    target.read_inputs()
-    target.write_outputs()
 
 
 class Test_Mux:
