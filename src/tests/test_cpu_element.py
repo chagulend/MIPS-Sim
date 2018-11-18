@@ -14,6 +14,8 @@ class Test_CPU_element:
             CPU_element(source, result)
         with pytest.raises(TypeError):
             CPU_element([1], [2])
+        with pytest.raises(ValueError):
+            CPU_element([source, source], [])
         cpu = CPU_element([source], [result])
         assert source in cpu.inputs
         assert source not in cpu.outputs
@@ -27,6 +29,8 @@ class Test_CPU_element:
             b.connect(a)
         with pytest.raises(TypeError):
             b.connect([5])
+        with pytest.raises(ValueError):
+            b.connect([b]) 
         b.connect([a])
         assert b.input_sources[result] == a
         assert source not in b.input_sources
