@@ -9,6 +9,8 @@ class CPU_element:
     def _init_verify(self, names, type):
         if not isinstance(names, list):
             raise TypeError("{}_names must be a list.".format(type))
+        if len(set(names)) != len(names):
+            raise ValueError("List must contain unique names.")
         for name in names:
             if not isinstance(name, str):
                 raise TypeError("A {} name must be a string.".format(type))
@@ -24,19 +26,22 @@ class CPU_element:
                 raise TypeError("Inputs list should only contain instances"
                                 + " of CPU_element.")
             sources = input_names.intersection(element.outputs)
-            for source in sources:
-                key = self.input_sources.setdefault(source, element)
-                if key != element:
-                    raise KeyError("Duplicace input name detected;"
-                                   + " got {} from {}".format(source, element)
-                                   + " Has: {} from {}."
-                                   .format(source, self.input_sources[source]))
+            duplicates = sources.intersection(self.input_sources)
+            if duplicates != set():
+                raise KeyError("Duplicace input names detected; "
+                               + "got {} from {}".format(duplicates, element))
+            self.input_sources.update({key:element for key in sources})
+        missing = input_names.difference(self.input_sources)
+        if missing != set():
+            raise ValueError(self, "was not connected fully, missing", missing)
 
     def read_inputs(self):
         """ Reads the inputs of the cpu element. Raises a KeyError if
         the element misses a input source."""
-        for name in self.inputs:
+        inputs = set(self.inputs)
+        for name in inputs:
             element = self.input_sources[name]
+            sources = inputs.intersection(element.outputs)
             value = 0
             try:
                 value = element.outputs[name]
