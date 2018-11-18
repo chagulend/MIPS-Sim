@@ -18,15 +18,17 @@ class CPU_element:
         """ Connects a cpu element to its inputs."""
         if not isinstance(inputs, list):
             raise TypeError("inputs must be a list.")
+        input_names = set(self.input_names)
         for element in inputs:
             if not isinstance(element, CPU_element):
                 raise TypeError("Inputs list should only contain instances"
                                 + " of CPU_element.")
-            for output in element.outputs:
-                source = self.input_sources.setdefault(output, element)
-                if source != element:
+            sources = input_names.intersection(element.outputs)
+            for source in sources:
+                key = self.input_sources.setdefault(source, element)
+                if key != element:
                     raise KeyError("Duplicace input name detected;"
-                                   + " got {} from {}".format(output, element)
+                                   + " got {} from {}".format(source, element)
                                    + " Has: {} from {}."
                                    .format(source, self.input_sources[source]))
 
