@@ -30,7 +30,7 @@ class Test_CPU_element:
         with pytest.raises(TypeError):
             b.connect([5])
         with pytest.raises(ValueError):
-            b.connect([b]) 
+            b.connect([b])
         b.connect([a])
         assert b.input_sources[result] == a
         assert source not in b.input_sources
@@ -54,8 +54,6 @@ class Test_CPU_element:
         assert b.inputs[result] == 0
         b.read_inputs()
         assert b.inputs[result] == i
-        with pytest.raises(KeyError):
-            a.read_inputs()
         with pytest.raises(TypeError):
             a.outputs[result] = "hei"
             b.read_inputs()
