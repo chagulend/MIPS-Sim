@@ -1,10 +1,14 @@
+import pytest
 from cpu_element import CPU_element
 from memory import Memory
 
 
+file_name = "tests/test.mem"
+
+
 def generate_test_file(d):
+    """ d = a dictionary."""
     lines = []
-    file_name = "tests/test.mem"
     lines.append("# Docs")
     for address, value in d.items():
         lines.append("0x{:08x} 0x{:08x} #  Description".format(address, value))
@@ -22,3 +26,6 @@ class Test_Memory:
         assert isinstance(mem, CPU_element)
         assert mem.memory == lines
 
+    def test_write_outputs(self):
+        with pytest.raises(NotImplementedError):
+            Memory(file_name, [], []).write_outputs()
