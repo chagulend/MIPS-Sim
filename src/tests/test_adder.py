@@ -1,5 +1,5 @@
 from cpu_element import CPU_element
-from adder import Adder
+from elements import Adder
 from tests.tools import set_signals
 
 

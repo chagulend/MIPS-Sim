@@ -1,6 +1,6 @@
 import pytest
 from cpu_element import CPU_element
-from mux import Mux
+from elements import Mux
 from tests.tools import set_signals
 
 

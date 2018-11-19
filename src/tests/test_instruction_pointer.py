@@ -1,5 +1,5 @@
 from cpu_element import CPU_element
-from instruction_pointer import Instruction_pointer
+from elements import Instruction_pointer
 from tests.tools import set_signals
 
 signals = "input"
