@@ -15,4 +15,4 @@ class Test_Instruction_pointer:
     def test_write_output(self):
         value = 55
         set_signals(self.source, self.ip, [signals], [value])
-        assert ip.output[result] == value
+        assert self.ip.outputs[result] == value
