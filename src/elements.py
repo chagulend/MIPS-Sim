@@ -24,5 +24,20 @@ class Mux(CPU_element):
             self.outputs[result] = self.inputs[self.input_names[1]]
 
 
+class Register_file(CPU_element):
+    registers = {i:0 for i in range(32)}
+
+    def __repr__(self):
+        register_names = ['$zero', '$at', '$v0', '$v1', '$a0',
+                          '$a1', '$a2', '$a3', '$t0', '$t1',
+                          '$t2', '$t3', '$t4', '$t5', '$t6',
+                          '$t7', '$s0', '$s1', '$s2', '$s3',
+                          '$s4', '$s5', '$s6', '$s7', '$t8',
+                          '$t9', '$k0', '$k1', '$gp', '$sp',
+                          '$fp', '$ra']
+        output = ["---Register file---"]
+
+
 class Memory(CPU_element):
-    pass
+    def initialize_memory(self, file_name):
+        raise NotImplementedError
