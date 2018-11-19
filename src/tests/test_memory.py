@@ -22,5 +22,3 @@ class Test_Memory:
         assert isinstance(mem, CPU_element)
         assert mem.memory == lines
 
-    def test_write_outputs(self):
-        raise NotImplementedError
