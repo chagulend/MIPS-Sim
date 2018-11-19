@@ -22,3 +22,7 @@ class Mux(CPU_element):
             self.outputs[result] = self.inputs[self.input_names[2]]
         else:
             self.outputs[result] = self.inputs[self.input_names[1]]
+
+
+class Memory(CPU_element):
+    pass
