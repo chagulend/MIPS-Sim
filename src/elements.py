@@ -24,6 +24,23 @@ class Mux(CPU_element):
             self.outputs[result] = self.inputs[self.input_names[1]]
 
 
+class Constant(CPU_element):
+    def __init__(self, value, output_name):
+        if not isinstance(value, int):
+            raise TypeError("value should be a int.")
+        if not isinstance(output_name, str):
+            raise TypeError("output_name should be a string.")
+        super().__init__([], [output_name])
+        self.value = value
+
+    def write_outputs(self):
+        result = self.output_names[0]
+        self.outputs[result] = self.value
+
+    def connect(self, inputs):
+        raise TypeError(self, "should not call connect.")
+
+
 class Register_file(CPU_element):
     registers = {i:0 for i in range(32)}
 
