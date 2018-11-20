@@ -9,9 +9,10 @@ class Instruction_pointer(CPU_element):
 
     def status(self):
         result = self.output_names[0]
-        output = ("---Instruction pointer---\n{}"
-                  .format(self.outputs[result]))
-        return output
+        outputs = ["---Instruction pointer---"]
+        outputs.append("Hex value: 0x{:08x}".format(self.outputs[result]))
+        outputs.append("Value: {}".format(self.outputs[result]))
+        return "\n".join(outputs)
 
 
 class Adder(CPU_element):
