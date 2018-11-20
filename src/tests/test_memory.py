@@ -22,10 +22,11 @@ class Test_Memory:
     def test_initialize_memory(self):
         lines = {i:i+i for i in range(10)}
         file_name = generate_test_file(lines)
-        mem = Memory(file_name, [], [])
+        mem = Memory([], [])
         assert isinstance(mem, CPU_element)
+        mem.initialize_memory(file_name)
         assert mem.memory == lines
 
     def test_write_outputs(self):
         with pytest.raises(NotImplementedError):
-            Memory(file_name, [], []).write_outputs()
+            Memory([], []).write_outputs()

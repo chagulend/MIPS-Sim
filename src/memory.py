@@ -2,11 +2,7 @@ from cpu_element import CPU_element
 
 
 class Memory(CPU_element):
-    def __init__(self, file_name, input_names, output_names):
-        super().__init__(input_names, output_names)
-        if not isinstance(file_name, str):
-            raise TypeError("file_name must be a string.")
-        self.memory = self._initialize_memory(file_name)        
+    memory = {}
 
     def status(self):
         """ Returns the memory as a printable string."""
@@ -16,8 +12,9 @@ class Memory(CPU_element):
                            .format(address, value))
         return "\n".join(outputs)
 
-    def _initialize_memory(self, file_name):
-        raise NotImplementedError
+    def initialize_memory(self, file_name):
+        if not isinstance(file_name, str):
+            raise TypeError("file_name must be a string.")
 
 
 class Data_memory(Memory):
