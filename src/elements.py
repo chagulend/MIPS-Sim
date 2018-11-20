@@ -7,6 +7,12 @@ class Instruction_pointer(CPU_element):
         result = self.output_names[0]
         self.outputs[result] = self.inputs[input_name]
 
+    def status(self):
+        result = self.output_names[0]
+        output = ("---Instruction pointer---\n{}"
+                  .format(self.outputs[result]))
+        return output
+
 
 class Adder(CPU_element):
     def write_outputs(self):
@@ -36,9 +42,6 @@ class Constant(CPU_element):
     def write_outputs(self):
         result = self.output_names[0]
         self.outputs[result] = self.value
-
-    def connect(self, inputs):
-        raise TypeError(self, "should not call connect.")
 
 
 class Register_file(CPU_element):
