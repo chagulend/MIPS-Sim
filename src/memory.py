@@ -2,7 +2,8 @@ from cpu_element import CPU_element
 
 
 class Memory(CPU_element):
-    memory = {}
+    def __init__(self, inputs, outputs):
+        self.memory = {}
 
     def status(self):
         """ Returns the memory as a printable string."""
