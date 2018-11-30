@@ -25,6 +25,8 @@ class CPU_element:
             if not isinstance(element, CPU_element):
                 raise TypeError("Inputs list should only contain instances"
                                 + " of CPU_element.")
+            if element == self:
+                continue
             sources = input_names.intersection(element.outputs)
             duplicates = sources.intersection(self.input_sources)
             if duplicates != set():
