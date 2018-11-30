@@ -45,6 +45,12 @@ class Test_CPU_element:
         sources = {key:item for key, item in zip(names, elements)}
         assert sources == a.input_sources
 
+    def test_connect_circular(self):
+        a = CPU_element([source, result], [result])
+        b = CPU_element([], [source, result])
+        a.connect([a, b])
+        assert a not in a.input_sources.values()
+
     def test_read_input(self):
         a = CPU_element([source], [result])
         b = CPU_element([result], [])
