@@ -3,6 +3,7 @@ from cpu_element import CPU_element
 
 class Memory(CPU_element):
     def __init__(self, inputs, outputs):
+        super().__init__(inputs, outputs)
         self.memory = {}
 
     def status(self):
