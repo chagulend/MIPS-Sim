@@ -32,3 +32,4 @@ class Test_Constant:
         inputs = a.inputs.copy()
         a.read_inputs()
         assert inputs == a.inputs
+        assert a.inputs == dict()
