@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 from cpu_element import CPU_element
-from elements import (Adder, Mux, Register_file, Instruction_pointer,
-                      Constant)
+from elements import Adder, Mux, Instruction_pointer, Constant
 from memory import Data_memory, Instruction_memory
 
 
@@ -10,9 +9,11 @@ class MIPS_simulator:
         self.ticks = 0
         elements = []
         self.ip = Instruction_pointer(["Ins_incr"], ["Ins_out"])
+        self.data_memory = Data_memory([], [])
+        self.instruction_memory = Instruction_memory([], [])
         elements.append(self.ip)
-        elements.append(Constant(4, "Constant"))
-        elements.append(Constant(1, "Control"))
+        elements.append(Constant("Constant", 4))
+        elements.append(Constant("Control", 1))
         elements.append(Adder(["Constant", "Ins_out"], ["Ins_incr"]))
         elements.append(Mux(["Control", "Ins_out", "Ins_incr"], ["Result"]))
         self.elements = elements
@@ -21,11 +22,19 @@ class MIPS_simulator:
     def _connect_elements(self):
         for element in self.elements:
             element.connect(self.elements)
+        self.elements.remove(self.ip)
+
+    def setup(self, file_name, startpoint):
+        self.ip.inputs[self.ip.input_names[0]] = startpoint
+        self.data_memory.initalize_memory(file_name)
+        self.instruction_memory.initalize_memory(file_name)
 
     def tick(self):
+        self.ip.write_outputs()
         for element in self.elements:
             element.read_inputs()
             element.write_outputs()
+        self.ip.read_inputs()
         self.ticks += 1
 
     def status(self):
@@ -41,4 +50,3 @@ if __name__ == "__main__":
     for i in range(10):
         simulator.tick()
         print(simulator.status())
-    

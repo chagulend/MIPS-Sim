@@ -8,6 +8,7 @@ class Instruction_pointer(CPU_element):
         self.outputs[result] = self.inputs[input_name]
 
     def status(self):
+        """ Returns the current instruction address as a printable string."""
         result = self.output_names[0]
         outputs = ["---Instruction pointer---"]
         outputs.append("Hex value: 0x{:08x}".format(self.outputs[result]))
@@ -32,11 +33,9 @@ class Mux(CPU_element):
 
 
 class Constant(CPU_element):
-    def __init__(self, value, output_name):
+    def __init__(self, output_name, value):
         if not isinstance(value, int):
             raise TypeError("value should be a int.")
-        if not isinstance(output_name, str):
-            raise TypeError("output_name should be a string.")
         super().__init__([], [output_name])
         self.value = value
 
