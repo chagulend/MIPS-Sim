@@ -1,23 +1,28 @@
 class CPU_element:
+    """ Intended for subclassing. Defines the methods:
+    __init__, _init_verify, connect, read_inputs and
+    write_outputs.
+    """
     def __init__(self, input_names, output_names):
-        self.inputs = self._init_verify(input_names, "inputs")
-        self.outputs = self._init_verify(output_names, "outputs")
+        self.inputs = self._init_verify("inputs", input_names)
+        self.outputs = self._init_verify("outputs", output_names)
         self.input_names = input_names
         self.output_names = output_names
         self.input_sources = {}
 
-    def _init_verify(self, names, type):
+    def _init_verify(self, name, names):
+        """ Verifies a list of names. Returns a dictionary."""
         if not isinstance(names, list):
-            raise TypeError("{}_names must be a list.".format(type))
+            raise TypeError("{}_names must be a list.".format(name))
         if len(set(names)) != len(names):
             raise ValueError("List must contain unique names.")
         for name in names:
             if not isinstance(name, str):
-                raise TypeError("A {} name must be a string.".format(type))
+                raise TypeError("List should only contain strings.")
         return {name:0 for name in names}
 
     def connect(self, inputs):
-        """ Connects a cpu element to its inputs."""
+        """ Connects a element to its inputs."""
         if not isinstance(inputs, list):
             raise TypeError("inputs must be a list.")
         input_names = set(self.input_names)
@@ -30,7 +35,7 @@ class CPU_element:
             sources = input_names.intersection(element.outputs)
             duplicates = sources.intersection(self.input_sources)
             if duplicates != set():
-                raise KeyError("Duplicace input names detected; "
+                raise KeyError("Duplicate input names detected; "
                                + "got {} from {}".format(duplicates, element))
             self.input_sources.update({key:element for key in sources})
         missing = input_names.difference(self.input_sources)
@@ -38,7 +43,7 @@ class CPU_element:
             raise ValueError(self, "was not connected fully, missing", missing)
 
     def read_inputs(self):
-        """ Reads the inputs of the cpu element."""
+        """ Updates the inputs dictionary."""
         for name, element in self.input_sources.items():
             value = element.outputs.get(name)
             if value == None:
@@ -49,5 +54,6 @@ class CPU_element:
             self.inputs[name] = value
 
     def write_outputs(self):
+        """ Updates outputs dictionary. Should be implemented by subclasses."""
         raise NotImplementedError(
-            "write_outputs must be implemented by CPU Element:", self)
+            "write_outputs must be implemented by:", self)
