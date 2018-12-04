@@ -3,6 +3,7 @@ from cpu_element import CPU_element
 
 class Register_file(CPU_element):
     def __init__(self, inputs, outputs):
+        super().__init__(inputs, outputs)
         self.registers = {i:0 for i in range(32)}
 
     def status(self):
