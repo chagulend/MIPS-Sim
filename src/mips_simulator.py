@@ -27,6 +27,7 @@ class MIPS_simulator:
         self.elements.remove(self.ip)
 
     def setup(self, file_name, startpoint):
+        """ Sets a startpoint and initializes memory."""
         self.ip.inputs[self.ip.input_names[0]] = startpoint
         self.data_memory.initalize_memory(file_name)
         self.instruction_memory.initalize_memory(file_name)
