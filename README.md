@@ -22,3 +22,6 @@ is to divide the stages into separate lists and connect in that way.
 
 Click is a Python package for handling command line interface
 that i can recommend. https://click.palletsprojects.com/en/7.x/
+
+Recommended reading
+* help(...); dict and list in python. Alternately https://docs.python.org/3/library/index.html
