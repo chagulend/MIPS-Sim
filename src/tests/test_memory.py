@@ -8,6 +8,7 @@ file_name = "tests/test.mem"
 
 
 def file_ready(string):
+    """ Compares hash of test.mem with string."""
     try:
         with open(file_name) as f:
             f_hash = hash(f.read())
@@ -16,11 +17,11 @@ def file_ready(string):
     return f_hash == hash(string)
 
 
-def generate_test_file(d):
-    """ d = a dictionary."""
+def generate_test_file(dict_):
+    """ Generates a file containing psudo instructions with comments."""
     lines = []
     lines.append("# Docs")
-    for address, value in d.items():
+    for address, value in dict_.items():
         lines.append("0x{:08x} 0x{:08x} #  Description".format(address, value))
     lines.append("# Final docs")
     output = "\n".join(lines)
