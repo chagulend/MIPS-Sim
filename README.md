@@ -16,7 +16,7 @@ to follow the convention of [control_names, input_names].
 For example see Mux class in elements.py and tests/test_mux.py.
 
 Duplicate output names:
-Connect is set up such that a duplicate output names will raise
+Connect is set up such that a duplicate input names will raise
 a Error. This can complicate setup for a pipeline approach; a suggestion
 is to divide the stages into separate lists and connect in that way.
 
@@ -24,4 +24,5 @@ Click is a Python package for handling command line interface
 that i can recommend. https://click.palletsprojects.com/en/7.x/
 
 Recommended reading
-* help(...); dict and list in python. Alternately https://docs.python.org/3/library/index.html
+* help(...); dict, list and zip in python.
+* https://docs.python.org/3/library/index.html
