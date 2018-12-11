@@ -9,10 +9,10 @@ class Instruction_pointer(CPU_element):
 
     def status(self):
         """ Returns the current instruction address as a printable string."""
-        result = self.output_names[0]
+        address = self.outputs[self.output_names[0]]
         outputs = ["---Instruction pointer---"]
-        outputs.append("Hex value: 0x{:08x}".format(self.outputs[result]))
-        outputs.append("Value: {}".format(self.outputs[result]))
+        outputs.append("Hex value: 0x{:08x}".format(address))
+        outputs.append("Value: {}".format(address))
         return "\n".join(outputs)
 
 
