@@ -8,6 +8,7 @@ from register_file import Register_file
 class MIPS_simulator:
     def __init__(self):
         self.ticks = 0
+        self.elements = []
         elements = []
         self.ip = Instruction_pointer(["Ins_incr"], ["Ins_out"])
         self.data_memory = Data_memory([], [])
@@ -18,13 +19,15 @@ class MIPS_simulator:
         elements.append(Constant("Control", 1))
         elements.append(Adder(["Constant", "Ins_out"], ["Ins_incr"]))
         elements.append(Mux(["Control", "Ins_out", "Ins_incr"], ["Result"]))
-        self.elements = elements
-        self._connect_elements()
-
-    def _connect_elements(self):
-        for element in self.elements:
-            element.connect(self.elements)
+        self._connect(elements)
         self.elements.remove(self.ip)
+
+    def _connect(self, elements, blacklist=[]):
+        """ Extends self.elements with connected elements."""
+        sources = elements + blacklist
+        for element in elements:
+            element.connect(sources)
+        self.elements.extend(elements)
 
     def setup(self, file_name, startpoint):
         """ Sets a startpoint and initializes memory."""
