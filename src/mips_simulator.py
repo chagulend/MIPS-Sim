@@ -22,9 +22,9 @@ class MIPS_simulator:
         self._connect(elements)
         self.elements.remove(self.ip)
 
-    def _connect(self, elements, blacklist=[]):
+    def _connect(self, elements, auxiliary=[]):
         """ Extends self.elements with connected elements."""
-        sources = elements + blacklist
+        sources = elements + auxiliary
         for element in elements:
             element.connect(sources)
         self.elements.extend(elements)
