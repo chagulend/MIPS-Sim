@@ -32,8 +32,8 @@ class MIPS_simulator:
     def setup(self, file_name, startpoint):
         """ Sets a startpoint and initializes memory."""
         self.ip.inputs[self.ip.input_names[0]] = startpoint
-        self.data_memory.initalize_memory(file_name)
-        self.instruction_memory.initalize_memory(file_name)
+        self.data_memory.initialize_memory(file_name)
+        self.instruction_memory.initialize_memory(file_name)
 
     def tick(self):
         self.ip.write_outputs()
