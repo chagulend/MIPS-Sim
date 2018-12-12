@@ -22,11 +22,10 @@ class MIPS_simulator:
         self._connect(elements)
         self.elements.remove(self.ip)
 
-    def _connect(self, elements, auxiliary=[]):
+    def _connect(self, elements):
         """ Extends self.elements with connected elements."""
-        sources = elements + auxiliary
         for element in elements:
-            element.connect(sources)
+            element.connect(elements)
         self.elements.extend(elements)
 
     def setup(self, file_name, startpoint):
