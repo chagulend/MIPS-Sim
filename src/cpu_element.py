@@ -1,3 +1,6 @@
+from exceptions import Duplicate_input_error
+
+
 class CPU_element:
     """ Intended for subclassing. Defines the methods:
     __init__, _init_verify, connect, read_inputs and
@@ -35,8 +38,8 @@ class CPU_element:
             sources = input_names.intersection(element.outputs)
             duplicates = sources.intersection(self.input_sources)
             if duplicates != set():
-                raise KeyError("Duplicate input names detected; "
-                               + "got {} from {}".format(duplicates, element))
+                raise Duplicate_input_error("{} got {} from {}."
+                                            .format(self, duplicates, element))
             self.input_sources.update({key:element for key in sources})
         missing = input_names.difference(self.input_sources)
         if missing != set():
