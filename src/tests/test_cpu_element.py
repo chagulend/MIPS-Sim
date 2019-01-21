@@ -1,6 +1,5 @@
 import pytest
 from cpu_element import CPU_element
-from exceptions import Duplicate_input_error
 
 
 signal = "source"
@@ -35,8 +34,14 @@ class Test_CPU_element:
         b.connect([a])
         assert b.input_sources[result] == a
         assert signal not in b.input_sources
-        with pytest.raises(Duplicate_input_error):
-            b.connect([CPU_element([], [result])])
+
+    def test_connect_order(self):
+        a = CPU_element([], [signal])
+        b = CPU_element([], [signal])
+        c = CPU_element([signal], [])
+        c.connect([a, b, c])
+        assert b in c.input_sources.values()
+        assert a not in c.input_sources.values()
 
     def test_connect_multiple(self):
         names = "abcdfg"
