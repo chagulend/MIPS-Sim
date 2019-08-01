@@ -1,25 +1,13 @@
 class CPU_element:
     """ Intended for subclassing. Defines the methods:
-    __init__, _init_verify, connect, read_inputs and
-    write_outputs.
+    __init__, connect, read_inputs and write_outputs.
     """
     def __init__(self, input_names, output_names):
-        self.inputs = self._init_verify("inputs", input_names)
-        self.outputs = self._init_verify("outputs", output_names)
+        self.inputs = dict.fromkeys(input_names, 0)
+        self.outputs = dict.fromkeys(output_names, 0)
         self.input_names = input_names
         self.output_names = output_names
-        self.input_sources = {}
-
-    def _init_verify(self, name, names):
-        """ Verifies a list of names. Returns a dictionary."""
-        if not isinstance(names, list):
-            raise TypeError("{}_names must be a list.".format(name))
-        if len(set(names)) != len(names):
-            raise ValueError("List must contain unique names.")
-        for name in names:
-            if not isinstance(name, str):
-                raise TypeError("List should only contain strings.")
-        return {name:0 for name in names}
+        self.input_sources = dict()
 
     def connect(self, inputs):
         """ Connects a element to its inputs."""
