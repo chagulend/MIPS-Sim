@@ -1,8 +1,15 @@
 class CPU_element:
-    """ Intended for subclassing. Defines the methods:
+    """
+    Defines the core functionality for a CPU element.
+    Intended for subclassing. Defines the methods:
     __init__, connect, read_inputs and write_outputs.
     """
     def __init__(self, input_names, output_names):
+        """
+        Initializes input and output of the element.
+        input_names: Names of inputs.
+        output_names: Names of outputs.
+        """
         self.inputs = dict.fromkeys(input_names, 0)
         self.outputs = dict.fromkeys(output_names, 0)
         self.input_names = input_names
@@ -10,7 +17,10 @@ class CPU_element:
         self.input_sources = dict()
 
     def connect(self, inputs):
-        """ Connects a element to its inputs."""
+        """
+        Connects a element to its inputs.
+        inputs: List of input sources.
+        """
         if not isinstance(inputs, list):
             raise TypeError("inputs must be a list.")
         input_names = set(self.input_names)
@@ -38,6 +48,10 @@ class CPU_element:
             self.inputs[name] = value
 
     def write_outputs(self):
-        """ Updates outputs dictionary. Should be implemented by subclasses."""
+        """
+        Updates outputs dictionary.
+        Should be implemented by subclasses.
+        """
         raise NotImplementedError(
-            "write_outputs must be implemented by:", self)
+            "write_outputs must be implemented by:", self
+        )
