@@ -12,22 +12,23 @@ class CPU_element:
         """
         self.inputs = dict.fromkeys(input_names, 0)
         self.outputs = dict.fromkeys(output_names, 0)
-        self.input_names = input_names
-        self.output_names = output_names
         self.input_sources = dict()
 
     def connect(self, inputs):
         """
         Connects a element to its inputs.
+        Will not connect a element to it self.
         inputs: List of input sources.
         """
         if not isinstance(inputs, list):
             raise TypeError("inputs must be a list.")
-        input_names = set(self.input_names)
+        input_names = set(self.inputs)
         for element in inputs:
             if not isinstance(element, CPU_element):
-                raise TypeError("Inputs list should only contain instances"
-                                + " of CPU_element.")
+                raise TypeError(
+                    "Inputs list should only contain instances"
+                    + " of CPU_element."
+                )
             if element == self:
                 continue
             sources = input_names.intersection(element.outputs)
