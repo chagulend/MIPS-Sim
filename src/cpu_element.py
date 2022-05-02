@@ -17,7 +17,7 @@ class CPU_element:
     def connect(self, inputs):
         """
         Connects a element to its inputs.
-        Will not connect a element to it self.
+        Will not connect a element to itself.
         inputs: List of input sources.
         """
         if not isinstance(inputs, list):
