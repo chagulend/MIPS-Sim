@@ -2,6 +2,7 @@ Code written for Python 3.
 Using pytest for testing.
 if pytest is missing install it using:
 * pip install pytest
+
 Note on some systems with Python 2 and 3, pip may be known as pip3.
 
 This code is intended for educational purposes. It is designed as a
