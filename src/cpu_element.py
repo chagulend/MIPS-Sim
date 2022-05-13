@@ -13,6 +13,8 @@ class CPU_element:
         self.inputs = dict.fromkeys(input_names, 0)
         self.outputs = dict.fromkeys(output_names, 0)
         self.input_sources = dict()
+        self.input_names = input_names
+        self.output_names = output_names
 
     def connect(self, inputs):
         """
