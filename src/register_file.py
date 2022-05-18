@@ -4,7 +4,7 @@ from cpu_element import CPU_element
 class Register_file(CPU_element):
     def __init__(self, inputs, outputs):
         super().__init__(inputs, outputs)
-        self.registers = {i:0 for i in range(32)}
+        self.registers = [0 for _ in range(32)]
 
     def status(self):
         """ Returns the registry as a printable string."""
@@ -18,8 +18,7 @@ class Register_file(CPU_element):
             "$fp", "$ra"
         ]
         outputs = ["---Register file---"]
-        for i, name in enumerate(register_names):
-            value = self.registers[i]
+        for name, value in zip(register_names, self.registers):
             outputs.append(
                 "Name: {} \t Hex value: 0x{:08x} \t Value: {}."
                 .format(name, value, value)
