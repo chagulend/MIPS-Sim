@@ -2,13 +2,22 @@ from cpu_element import CPU_element
 
 
 class Instruction_pointer(CPU_element):
+    """
+    Instruction pointer element. Keeps track of the current
+    instruction address.
+    """
     def write_outputs(self):
+        """
+        Sets the pointer to the current input.
+        """
         input_name = self.input_names[0]
         result = self.output_names[0]
         self.outputs[result] = self.inputs[input_name]
 
     def status(self):
-        """ Returns the current instruction address as a printable string."""
+        """
+        Returns the current instruction address as a printable string.
+        """
         address = self.outputs[self.output_names[0]]
         outputs = ["---Instruction pointer---"]
         outputs.append("Hex value: 0x{:08x}".format(address))
@@ -38,6 +47,7 @@ class Mux(CPU_element):
         """
         Set output based on control signal. By default this
         assumes a binary True or False.
+
         """
         control = self.inputs[self.input_names[0]]
         result = self.output_names[0]
