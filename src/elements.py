@@ -44,8 +44,12 @@ class Constant(CPU_element):
     Element with constant output. Intended as a demo component.
     """
     def __init__(self, output_name, value):
+        """
+        Adds value to existing attributes.
+        This is to provide a output value.
+        """
         if not isinstance(value, int):
-            raise TypeError("value should be a int.")
+            raise TypeError("Value should be a int.")
         super().__init__([], [output_name])
         self.value = value
 
