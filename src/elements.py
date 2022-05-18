@@ -40,6 +40,9 @@ class Mux(CPU_element):
 
 
 class Constant(CPU_element):
+    """
+    Element with constant output. Intended as a demo component.
+    """
     def __init__(self, output_name, value):
         if not isinstance(value, int):
             raise TypeError("value should be a int.")
@@ -47,5 +50,10 @@ class Constant(CPU_element):
         self.value = value
 
     def write_outputs(self):
+        """
+        Set output to initial value. Implemented to allow
+        write_outputs to be called without raising parent
+        class exception.
+        """
         result = self.output_names[0]
         self.outputs[result] = self.value
