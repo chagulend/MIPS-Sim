@@ -10,8 +10,10 @@ class Memory(CPU_element):
         """ Returns the memory as a printable string."""
         outputs = ["---Memory---"]
         for address, value in self.memory.items():
-            outputs.append("Address: 0x{:08x} \t Hex value: 0x{:08x}."
-                           .format(address, value))
+            outputs.append(
+                "Address: 0x{:08x} \t Hex value: 0x{:08x}."
+                .format(address, value)
+            )
         return "\n".join(outputs)
 
     def initialize_memory(self, file_name):
