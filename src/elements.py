@@ -57,6 +57,8 @@ class Constant(CPU_element):
         """
         Adds value to existing attributes.
         This is to provide a output value.
+        output_name: String with output name.
+        value: Int with output value.
         """
         if not isinstance(value, int):
             raise TypeError("Value should be a int.")
