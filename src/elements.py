@@ -17,9 +17,16 @@ class Instruction_pointer(CPU_element):
 
 
 class Adder(CPU_element):
+    """
+    Adder element.
+    """
     def write_outputs(self):
+        """
+        Sums all inputs, masking output such that the result is 32 bit.
+        """
         result = self.output_names[0]
-        self.outputs[result] = sum(self.inputs.values()) & 0xffffffff
+        mask = 0xffffffff
+        self.outputs[result] = sum(self.inputs.values()) & mask
 
 
 class Mux(CPU_element):
