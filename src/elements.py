@@ -30,7 +30,14 @@ class Adder(CPU_element):
 
 
 class Mux(CPU_element):
+    """
+    MUX element. Selects between inputs based on a control signal.
+    """
     def write_outputs(self):
+        """
+        Set output based on control signal. By default this
+        assumes a binary True or False.
+        """
         control = self.inputs[self.input_names[0]]
         result = self.output_names[0]
         if control == 0:
