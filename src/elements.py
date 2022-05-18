@@ -32,6 +32,7 @@ class Adder(CPU_element):
 class Mux(CPU_element):
     """
     MUX element. Selects between inputs based on a control signal.
+    Assumes that first input is the control signal.
     """
     def write_outputs(self):
         """
@@ -40,10 +41,12 @@ class Mux(CPU_element):
         """
         control = self.inputs[self.input_names[0]]
         result = self.output_names[0]
+        source = ""
         if control == 0:
-            self.outputs[result] = self.inputs[self.input_names[1]]
+            source = self.input_names[1]
         else:
-            self.outputs[result] = self.inputs[self.input_names[2]]
+            source = self.input_names[2]
+        self.outputs[result] = self.inputs[source]
 
 
 class Constant(CPU_element):
